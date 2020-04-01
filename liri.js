@@ -19,27 +19,35 @@ var axios = require("axios");
 
 // this is for OMDB AXIOS FOR MOVIE INPUT for node liri.js movie-this
 
+
+var mainInput = process.argv[2];
+
 var input = process.argv;
+console.log(input);
 var movieinput ="";
 // this is for multiple words movies to add to the url that we gonna need
-for (var i = 2;i<input.length;i++){
-    if (i > 2 && i < input.length) {
+
+if (input[3] == null ){
+    movieinput += "Mr.Nobody";
+} else{
+for (var i = 3;i<input.length;i++){
+    
+     if (i > 3 && i < input.length) {
         movieinput = movieinput + "+" + input[i];
         
       } 
     else {
         movieinput += input[i];
       } 
+    }
 }
-if (input[i] == null){
-    movieinput += "Mr.Nobody";
-}
+
 
 // creating queryUrl for axios
 var queryUrl = "http://www.omdbapi.com/?t=" + movieinput + "&y=&plot=short&apikey=trilogy";
-
+console.log(queryUrl)
 // creating the api request and printing out the info
-
+var displayMovie = function(){
 axios.get(queryUrl).then(
     function(response) {
       console.log("---------Title--------");
@@ -85,7 +93,12 @@ axios.get(queryUrl).then(
           console.log(error.config);
         });
       
-
+}
+    switch(mainInput){
+        case "movie-this":
+           displayMovie();
+            break;
+    }
 /// creating queryUrl for Bands In Town
 
 // var bandsUrl = "https://rest.bandsintown.com/artists/" + artist +"/events?app_id=codingbootcamp";
