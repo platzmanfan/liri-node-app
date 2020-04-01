@@ -56,15 +56,25 @@ At the end i created switch that takes the variable i created for userinput and 
 ### do-what-it-says
 
 
-###  node liri.js concert-this  <artist/band name  here>
+##  node liri.js concert-this  <artist/band name  here>
+
+### Here is screenshot of our search for band: Green Day
 ![](screenshots/ss_greenday_search.png)
+
+### Here is screenshot of our search for artist: Morissey
+![](screenshots/ss_morissey_search.png)
 
 What this is doing is upon typing the command concert-this you can type the name of the artists or band and it will give you useful information what you need about your band or artists!
 
+### Our result for Green Day search: 
 
 ![](screenshots/concert_this_ss.png)
 
-### node liri.js spotify-this-song <song name here>
+### Our result for Morissey search:
+![](screenshots/concert_this_ss1.png)
+
+## node liri.js spotify-this-song <song name here>
+
 ![](screenshots/spotify-this-song_search.png)
 
 What this is doing is gives you information about the song you typed in! 
@@ -73,7 +83,11 @@ What this is doing is gives you information about the song you typed in!
 3. Preview 30s link from spotify_url
 4. The Album that the song is from
 
-### node liri.js movie this <movie name here>
+![](screenshots/spotify_results.png)
+
+## node liri.js movie this <movie name here>
+
+![](screenshots/movie-this_search.png)
 
 What this is doing is gives us information about the movie you searched! You can find info like:
 * Title,
@@ -85,13 +99,15 @@ What this is doing is gives us information about the movie you searched! You can
 * Plot ,
 * Actors 
 
-### node liri.js do-what-it-says 
+![](screenshots/movie-search_results.png)
+
+## node liri.js do-what-it-says 
 
 What this is doing is gives us the random.txt that we had put in
 
 
 
-# Screenshots of the APP:
+
 
 
 
