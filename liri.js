@@ -20,47 +20,64 @@ var spotify = new Spotify(keys.spotify);
 console.log(spotify);
 
 
-var findSpotify = function(){
-spotify
-  .search({ type: 'track', query:'All The Small Things',limit:5 })
-  .then(function(response) {
-    console.log(response)
-    for(var i=0; i<response.tracks.items.length; i++){
-        console.log(response.tracks.items[i].artists[0].name)
-    }
-  })
-  .catch(function(err) {
-    console.log(err);
-  });
-}
 // this is for OMDB AXIOS FOR MOVIE INPUT for node liri.js movie-this
 
-
+// global variables
 var mainInput = process.argv[2];
 
 var input = process.argv;
 console.log(input);
-var movieurl ="";
+var universalurl ="";
+
+
+
+
 // this is for multiple words movies to add to the url that we gonna need
 
 if (input[3] == null ){
-    movieurl += "Mr.Nobody";
+    universalurl += "Mr.Nobody";
 } else{
 for (var i = 3;i<input.length;i++){
     
      if (i > 3 && i < input.length) {
-        movieurl = movieurl + "+" + input[i];
+        universalurl = universalurl + "+" + input[i];
         
       } 
     else {
-        movieurl += input[i];
+        universalurl += input[i];
       } 
     }
 }
-
+var findSpotify = function(){
+    spotify
+      .search({ type: 'track', query:universalurl,limit:5 })
+      .then(function(response) {
+        
+        for(var i=0; i<response.tracks.items.length; i++){
+            
+            console.log("\n\n\n\n");
+            console.log("Artists");
+            console.log("--------------------");
+            console.log("|||| "+response.tracks.items[i].artists[0].name+" ||||");
+            console.log("---------------------------------");
+            console.log("-------Song's Name----------");
+            console.log("|||| "+response.tracks.items[i].name+" |||||");
+            console.log("-------------------------------");
+            console.log("-------Preview Link from spotify to listen---\n");
+            console.log(response.tracks.items[i].preview_url);
+            console.log("--------------------------------------------------------------------------");
+            console.log("-------The Album That the Song is from --------");
+            console.log("|  |   | "+ response.tracks.items[i].album.name+"  |  |  |");
+            console.log("------------------------------------")
+        }
+      })
+      .catch(function(err) {
+        console.log(err);
+      });
+    }
 
 // creating queryUrl for axios
-var queryUrl = "http://www.omdbapi.com/?t=" + movieurl + "&y=&plot=short&apikey=trilogy";
+var queryUrl = "http://www.omdbapi.com/?t=" + universalurl + "&y=&plot=short&apikey=trilogy";
 
 // creating the api request and printing out the info
 var displayMovie = function(){
@@ -117,7 +134,7 @@ axios.get(queryUrl).then(
 var findConcert = function(){
 
 
-var bandsUrl = "https://rest.bandsintown.com/artists/" + movieurl +"/events?app_id=codingbootcamp";
+var bandsUrl = "https://rest.bandsintown.com/artists/" + universalurl +"/events?app_id=codingbootcamp";
 console.log(bandsUrl)
 axios.get(bandsUrl).then(
     function(response){
