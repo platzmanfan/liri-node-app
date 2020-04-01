@@ -57,10 +57,15 @@ At the end i created switch that takes the variable i created for userinput and 
 
 
 ###  node liri.js concert-this  <artist/band name  here>
+![](screenshots/ss_greenday_search.png)
 
 What this is doing is upon typing the command concert-this you can type the name of the artists or band and it will give you useful information what you need about your band or artists!
 
+
+![](screenshots/concert_this_ss.png)
+
 ### node liri.js spotify-this-song <song name here>
+![](screenshots/spotify-this-song_search.png)
 
 What this is doing is gives you information about the song you typed in! 
 1. Name of Artists
