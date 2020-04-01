@@ -19,6 +19,7 @@
   "homepage": "https://github.com/platzmanfan/node_liri#readme",
   "dependencies": {
     "axios": "^0.19.2",
-    "dotenv": "^8.2.0"
+    "dotenv": "^8.2.0",
+    "moment": "^2.24.0"
   }
 }

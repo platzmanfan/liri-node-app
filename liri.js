@@ -9,6 +9,8 @@ var keys = require("./keys.js");
 
 var axios = require("axios");
 
+var moment = require("moment");
+
 
 
 
@@ -24,28 +26,28 @@ var mainInput = process.argv[2];
 
 var input = process.argv;
 console.log(input);
-var movieinput ="";
+var movieurl ="";
 // this is for multiple words movies to add to the url that we gonna need
 
 if (input[3] == null ){
-    movieinput += "Mr.Nobody";
+    movieurl += "Mr.Nobody";
 } else{
 for (var i = 3;i<input.length;i++){
     
      if (i > 3 && i < input.length) {
-        movieinput = movieinput + "+" + input[i];
+        movieurl = movieurl + "+" + input[i];
         
       } 
     else {
-        movieinput += input[i];
+        movieurl += input[i];
       } 
     }
 }
 
 
 // creating queryUrl for axios
-var queryUrl = "http://www.omdbapi.com/?t=" + movieinput + "&y=&plot=short&apikey=trilogy";
-console.log(queryUrl)
+var queryUrl = "http://www.omdbapi.com/?t=" + movieurl + "&y=&plot=short&apikey=trilogy";
+
 // creating the api request and printing out the info
 var displayMovie = function(){
 axios.get(queryUrl).then(
@@ -94,11 +96,69 @@ axios.get(queryUrl).then(
         });
       
 }
-    switch(mainInput){
-        case "movie-this":
-           displayMovie();
-            break;
-    }
+  
 /// creating queryUrl for Bands In Town
 
-// var bandsUrl = "https://rest.bandsintown.com/artists/" + artist +"/events?app_id=codingbootcamp";
+
+var findConcert = function(){
+
+
+var bandsUrl = "https://rest.bandsintown.com/artists/" + movieurl +"/events?app_id=codingbootcamp";
+console.log(bandsUrl)
+axios.get(bandsUrl).then(
+    function(response){
+       for(var i=0; i<response.data.length; i++){
+           console.log("\n\n\n\n");
+        console.log("------Name of the Venue-----");
+        console.log("      "+response.data[i].venue.name);
+        console.log("-------------------------");
+        console.log("----------City-------------");
+        console.log("      "+ response.data[i].venue.city);
+        console.log("------------------------------");
+        console.log("----------Country------------");
+        console.log("         "+ response.data[i].venue.country);
+        console.log("-------------------------");
+        console.log("-----Date of the Event----");
+        var temp = response.data[i].datetime;
+        temp = moment().format("MM/DD/YYYY")
+        console.log("        "+temp);
+        console.log("-------------------------");
+        
+       }    
+    
+}).catch(function(error){
+    if (error.response) {
+        console.log("---------------Data---------------");
+        console.log(error.response.data);
+        console.log("---------------Status---------------");
+        console.log(error.response.status);
+        console.log("---------------Status---------------");
+        console.log(error.response.headers);
+      } else if (error.request) {
+        console.log(error.request);
+      } else {
+       
+        console.log("Error", error.message);
+      }
+      console.log(error.config);
+    });
+
+}
+
+
+
+
+
+
+
+switch(mainInput){
+
+    case "concert-this":
+        findConcert()
+        break;
+
+    case "movie-this":
+       displayMovie();
+        break; 
+        
+}
