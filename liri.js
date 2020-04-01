@@ -11,14 +11,28 @@ var axios = require("axios");
 
 var moment = require("moment");
 
-
+var Spotify = require("node-spotify-api");
 
 
 //creating the object from the api
-// var spotify = new Spotify(keys.spotify);
+// spotify node api
+var spotify = new Spotify(keys.spotify);
+console.log(spotify);
 
 
-
+var findSpotify = function(){
+spotify
+  .search({ type: 'track', query:'All The Small Things',limit:5 })
+  .then(function(response) {
+    console.log(response)
+    for(var i=0; i<response.tracks.items.length; i++){
+        console.log(response.tracks.items[i].artists[0].name)
+    }
+  })
+  .catch(function(err) {
+    console.log(err);
+  });
+}
 // this is for OMDB AXIOS FOR MOVIE INPUT for node liri.js movie-this
 
 
@@ -97,8 +111,8 @@ axios.get(queryUrl).then(
       
 }
   
-/// creating queryUrl for Bands In Town
-
+/// creating bandsUrl for Bands In Town
+/// bands in town app that triggers upon concert-this
 
 var findConcert = function(){
 
@@ -149,14 +163,17 @@ axios.get(bandsUrl).then(
 
 
 
-
+// creating switch state for userinput
 
 switch(mainInput){
 
     case "concert-this":
-        findConcert()
+        findConcert();
         break;
 
+    case "spotify-this-song":
+        findSpotify();
+        break;
     case "movie-this":
        displayMovie();
         break; 
