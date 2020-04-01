@@ -5,6 +5,8 @@ require("dotenv").config();
 
 var keys = require("./keys.js");
 
+const fse = require('fs-extra')
+
 // creating the packages // 
 
 var axios = require("axios");
@@ -48,11 +50,29 @@ for (var i = 3;i<input.length;i++){
       } 
     }
 }
+
 var findSpotify = function(){
+    if (universalurl.length === 9){
+        spotify
+        .search({ type: 'track', query:"The Sign",limit:1 })
+        .then(function(response) {
+            console.log("Artist");
+            console.log("--------------------");
+            console.log(response.tracks.items[0].artists[0].name);
+            console.log("-------Song's Name----------");
+            console.log("|||| "+response.tracks.items[0].name+" |||||");
+            console.log("-------------------------------");
+            console.log("-------Preview Link from spotify to listen---\n");
+            console.log(response.tracks.items[0].preview_url);
+            console.log("--------------------------------------------------------------------------");
+            console.log("-------The Album That the Song is from --------");
+            console.log("|  |   | "+ response.tracks.items[0].album.name+"  |  |  |");
+            console.log("------------------------------------")
+    });
+    }else{
     spotify
       .search({ type: 'track', query:universalurl,limit:5 })
       .then(function(response) {
-        
         for(var i=0; i<response.tracks.items.length; i++){
             
             console.log("\n\n\n\n");
@@ -70,11 +90,12 @@ var findSpotify = function(){
             console.log("|  |   | "+ response.tracks.items[i].album.name+"  |  |  |");
             console.log("------------------------------------")
         }
-    
+            
       })
       .catch(function(err) {
         console.log(err);
       });
+    }
 }
     
 
@@ -193,8 +214,12 @@ switch(mainInput){
     case "spotify-this-song":
         findSpotify();
         break;
+
     case "movie-this":
        displayMovie();
         break; 
+
+    case "do-what-it-says":
+
         
 }
