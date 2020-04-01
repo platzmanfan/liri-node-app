@@ -17,7 +17,7 @@ var axios = require("axios");
 
 
 
-// creating an input variable
+// this is for OMDB AXIOS FOR MOVIE INPUT for node liri.js movie-this
 
 var input = process.argv;
 var movieinput ="";
@@ -26,14 +26,19 @@ for (var i = 2;i<input.length;i++){
     if (i > 2 && i < input.length) {
         movieinput = movieinput + "+" + input[i];
         
-      } else {
+      } 
+    else {
         movieinput += input[i];
       } 
 }
+if (input[i] == null){
+    movieinput += "Mr.Nobody";
+}
+
 // creating queryUrl for axios
 var queryUrl = "http://www.omdbapi.com/?t=" + movieinput + "&y=&plot=short&apikey=trilogy";
 
-console.log(queryUrl) // should be deleted
+// creating the api request and printing out the info
 
 axios.get(queryUrl).then(
     function(response) {
@@ -46,8 +51,10 @@ axios.get(queryUrl).then(
       console.log("---------IMDB RATING-------");
       console.log("         "+ response.data.imdbRating);
       console.log("-----------------------------");
-      console.log("--Rotten Tomatoes Value of the Moovie--");
-      console.log("          "+response.data.Ratings[1].Value);
+      console.log("--Rotten Tomatoes Value of the Movie--");
+      if(response.data.Ratings.Value == null){
+        console.log("No Rating Available")} else {
+      console.log("          "+response.data.Ratings[1].Value);  };
       console.log("-----------------------------");
       console.log("---------Country--------");
       console.log("          "+response.data.Country);
@@ -62,5 +69,23 @@ axios.get(queryUrl).then(
       console.log("  "+ response.data.Actors);
       console.log("-----------------------------------");
     }).catch(function(error){
-        console.log("Error", error.message)
-    });
+        if (error.response) {
+            console.log("---------------Data---------------");
+            console.log(error.response.data);
+            console.log("---------------Status---------------");
+            console.log(error.response.status);
+            console.log("---------------Status---------------");
+            console.log(error.response.headers);
+          } else if (error.request) {
+            console.log(error.request);
+          } else {
+           
+            console.log("Error", error.message);
+          }
+          console.log(error.config);
+        });
+      
+
+/// creating queryUrl for Bands In Town
+
+// var bandsUrl = "https://rest.bandsintown.com/artists/" + artist +"/events?app_id=codingbootcamp";
