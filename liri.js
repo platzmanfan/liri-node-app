@@ -70,11 +70,13 @@ var findSpotify = function(){
             console.log("|  |   | "+ response.tracks.items[i].album.name+"  |  |  |");
             console.log("------------------------------------")
         }
+    
       })
       .catch(function(err) {
         console.log(err);
       });
-    }
+}
+    
 
 // creating queryUrl for axios
 var queryUrl = "http://www.omdbapi.com/?t=" + universalurl + "&y=&plot=short&apikey=trilogy";
@@ -150,8 +152,8 @@ axios.get(bandsUrl).then(
         console.log("         "+ response.data[i].venue.country);
         console.log("-------------------------");
         console.log("-----Date of the Event----");
-        var temp = response.data[i].datetime;
-        temp = moment().format("MM/DD/YYYY")
+        var temp = moment(response.data[i].datetime);
+        temp =  temp.format("MM/DD/YYYY")
         console.log("        "+temp);
         console.log("-------------------------");
         
