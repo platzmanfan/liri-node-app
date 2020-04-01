@@ -5,7 +5,7 @@ require("dotenv").config();
 
 var keys = require("./keys.js");
 
-const fse = require('fs-extra')
+const fse = require('fs-extra');
 
 // creating the packages // 
 
@@ -19,7 +19,7 @@ var Spotify = require("node-spotify-api");
 //creating the object from the api
 // spotify node api
 var spotify = new Spotify(keys.spotify);
-console.log(spotify);
+// console.log(spotify);
 
 
 // this is for OMDB AXIOS FOR MOVIE INPUT for node liri.js movie-this
@@ -30,8 +30,6 @@ var mainInput = process.argv[2];
 var input = process.argv;
 console.log(input);
 var universalurl ="";
-
-
 
 
 // this is for multiple words movies to add to the url that we gonna need
@@ -50,6 +48,51 @@ for (var i = 3;i<input.length;i++){
       } 
     }
 }
+
+var findConcert = function(){
+
+
+    var bandsUrl = "https://rest.bandsintown.com/artists/" + universalurl +"/events?app_id=codingbootcamp";
+    console.log(bandsUrl)
+    axios.get(bandsUrl).then(
+        function(response){
+           for(var i=0; i<response.data.length; i++){
+               console.log("\n\n\n\n");
+            console.log("------Name of the Venue-----");
+            console.log("      "+response.data[i].venue.name);
+            console.log("-------------------------");
+            console.log("----------City-------------");
+            console.log("      "+ response.data[i].venue.city);
+            console.log("------------------------------");
+            console.log("----------Country------------");
+            console.log("         "+ response.data[i].venue.country);
+            console.log("-------------------------");
+            console.log("-----Date of the Event----");
+            var temp = moment(response.data[i].datetime);
+            temp =  temp.format("MM/DD/YYYY")
+            console.log("        "+temp);
+            console.log("-------------------------");
+            
+           }    
+        
+    }).catch(function(error){
+        if (error.response) {
+            console.log("---------------Data---------------");
+            console.log(error.response.data);
+            console.log("---------------Status---------------");
+            console.log(error.response.status);
+            console.log("---------------Status---------------");
+            console.log(error.response.headers);
+          } else if (error.request) {
+            console.log(error.request);
+          } else {
+           
+            console.log("Error", error.message);
+          }
+          console.log(error.config);
+        });
+    
+    }
 
 var findSpotify = function(){
     if (universalurl.length === 9){
@@ -71,7 +114,7 @@ var findSpotify = function(){
     });
     }else{
     spotify
-      .search({ type: 'track', query:universalurl,limit:5 })
+      .search({ type: 'track', query:universalurl,limit:10 })
       .then(function(response) {
         for(var i=0; i<response.tracks.items.length; i++){
             
@@ -84,7 +127,10 @@ var findSpotify = function(){
             console.log("|||| "+response.tracks.items[i].name+" |||||");
             console.log("-------------------------------");
             console.log("-------Preview Link from spotify to listen---\n");
-            console.log(response.tracks.items[i].preview_url);
+            if(response.tracks.items[i].preview_url == null){
+                console.log("Sorrry there are no links for this song")
+            }else{
+            console.log(response.tracks.items[i].preview_url);}
             console.log("--------------------------------------------------------------------------");
             console.log("-------The Album That the Song is from --------");
             console.log("|  |   | "+ response.tracks.items[i].album.name+"  |  |  |");
@@ -154,53 +200,19 @@ axios.get(queryUrl).then(
 /// creating bandsUrl for Bands In Town
 /// bands in town app that triggers upon concert-this
 
-var findConcert = function(){
+var readFiles = function(){
 
-
-var bandsUrl = "https://rest.bandsintown.com/artists/" + universalurl +"/events?app_id=codingbootcamp";
-console.log(bandsUrl)
-axios.get(bandsUrl).then(
-    function(response){
-       for(var i=0; i<response.data.length; i++){
-           console.log("\n\n\n\n");
-        console.log("------Name of the Venue-----");
-        console.log("      "+response.data[i].venue.name);
-        console.log("-------------------------");
-        console.log("----------City-------------");
-        console.log("      "+ response.data[i].venue.city);
-        console.log("------------------------------");
-        console.log("----------Country------------");
-        console.log("         "+ response.data[i].venue.country);
-        console.log("-------------------------");
-        console.log("-----Date of the Event----");
-        var temp = moment(response.data[i].datetime);
-        temp =  temp.format("MM/DD/YYYY")
-        console.log("        "+temp);
-        console.log("-------------------------");
-        
-       }    
-    
-}).catch(function(error){
-    if (error.response) {
-        console.log("---------------Data---------------");
-        console.log(error.response.data);
-        console.log("---------------Status---------------");
-        console.log(error.response.status);
-        console.log("---------------Status---------------");
-        console.log(error.response.headers);
-      } else if (error.request) {
-        console.log(error.request);
-      } else {
-       
-        console.log("Error", error.message);
-      }
-      console.log(error.config);
+    fse.readFile("random.txt","utf8",function(error,data)
+    {
+        if(error){
+            return console.log(error);
+        }
+        console.log(data)
+        findSpotify(data)
     });
+  
 
 }
-
-
-
 
 
 // creating switch state for userinput
@@ -220,6 +232,13 @@ switch(mainInput){
         break; 
 
     case "do-what-it-says":
+        readFiles();
+        break;
 
+    default:
+        console.log("INSERT WHAT YOU WANT TO DO!\nFOR SEARCHING MOVIE type movie-this")
+        console.log("FOR SEARCHING AN ARTIST OR BAND Type concert-this");
+        console.log("FOR SPOTIFY A SONG type spotify-this-song");
+        console.log("FOR DO WHAT IT SAYS type do-what-it-says");
         
 }
