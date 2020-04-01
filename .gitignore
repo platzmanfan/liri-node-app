@@ -2,8 +2,22 @@
 
 
 
+##############
+#node modules#
+##############
+
+node_modules/
+
+##########
+#DS STORE#
+##########
+.DS_Store
 
 
+########
+#dotenv#
+########
+.env
 
 
 
