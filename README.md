@@ -71,7 +71,7 @@ What this is doing is upon typing the command concert-this you can type the name
 ![](screenshots/concert_this_ss.png)
 
 ### Our result for Morissey search:
-![](screenshots/concert_this_ss1.png)
+![](screenshots/morrisey_search.png)
 
 ## node liri.js spotify-this-song <song name here>
 
