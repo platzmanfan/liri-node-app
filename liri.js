@@ -203,12 +203,17 @@ axios.get(queryUrl).then(
 var readFiles = function(){
 
     fse.readFile("random.txt","utf8",function(error,data)
-    {
+    {   
+        var array = data;
+        array = array.split(",");
+
+
         if(error){
             return console.log(error);
         }
-        console.log(data)
-        findSpotify(data)
+
+        console.log(array)
+        findSpotify(array)
     });
   
 
