@@ -122,7 +122,7 @@ With this we can see that we can access text from external file and use that to 
 ### In this case i haver Matrix movie into random.txt and that's why it will show up that movie! But we can do this with spotify-this-song and concert-this aswell!!!
 
 
-![](screenshots/matrix_final.png)
+![](screenshots/do-what-it-says_matrix.png)
 
 
 Also i tried  for spotify-this-song and it's working!! I just needed to create separte function that gets a parameter and it's been called within the function i need!
