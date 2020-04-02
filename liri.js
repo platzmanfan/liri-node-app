@@ -187,6 +187,54 @@ var findSpotify = function(){
     }
     
 }
+var movieFunc = function(songname){
+    var queryUrl = "http://www.omdbapi.com/?t=" + songname + "&y=&plot=short&apikey=trilogy";
+    axios.get(queryUrl).then(
+        function(response) {
+          console.log("---------Title--------");
+          console.log("        "+response.data.Title);
+          console.log("-----------------------");
+          console.log("-----Year it came out------");
+          console.log("         "+response.data.Year);
+          console.log("---------------------------");
+          console.log("---------IMDB RATING-------");
+          console.log("         "+ response.data.imdbRating);
+          console.log("-----------------------------");
+          console.log("--Rotten Tomatoes Value of the Movie--");
+          if(response.data.Ratings.Value == null){
+            console.log("No Rating Available")} else {
+          console.log("          "+response.data.Ratings[1].Value);  };
+          console.log("-----------------------------");
+          console.log("---------Country--------");
+          console.log("          "+response.data.Country);
+          console.log("------------------------");
+          console.log("-----------Languages: --------");
+          console.log("  "+response.data.Language);
+          console.log("-------------------------------");
+          console.log("----------Movie Plot-------\n");
+          console.log(response.data.Plot);
+          console.log("-------------------------------");
+          console.log("--------Actors in this Movie-------\n");
+          console.log("  "+ response.data.Actors);
+          console.log("-----------------------------------");
+        }).catch(function(error){
+            if (error.response) {
+                console.log("---------------Data---------------");
+                console.log(error.response.data);
+                console.log("---------------Status---------------");
+                console.log(error.response.status);
+                console.log("---------------Status---------------");
+                console.log(error.response.headers);
+              } else if (error.request) {
+                console.log(error.request);
+              } else {
+               
+                console.log("Error", error.message);
+              }
+              console.log(error.config);
+            });
+        
+    }
 // creating queryUrl for axios
 var queryUrl = "http://www.omdbapi.com/?t=" + universalurl + "&y=&plot=short&apikey=trilogy";
 
@@ -249,15 +297,18 @@ var readFiles = function(){
     {   
         var array = data;
         array = array.split(",")
-        
-
+        var temp1 = array[4]
         console.log(array)
         if(error){
             return console.log(error);
         }
 
         console.log(array[1]);
-        spotifyFunc(array[1]);
+    
+        // this can be used if we want to search a specific song for spotify-this-song what we put in our random.txt file
+        // spotifyFunc(array[1]);  
+        // we will just need to uncomment that and comment out movieFunc
+        movieFunc(array[1]);
     });
   
 

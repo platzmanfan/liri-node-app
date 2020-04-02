@@ -55,6 +55,10 @@ At the end i created switch that takes the variable i created for userinput and 
 ### movie-this
 ### do-what-it-says
 
+# By Default if we type in node liri.js it's gonna ask us to choose
+
+![](screenshots/default.png)
+
 
 ##  node liri.js concert-this  <artist/band name  here>
 
@@ -62,7 +66,7 @@ At the end i created switch that takes the variable i created for userinput and 
 ![](screenshots/ss_greenday_search.png)
 
 ### Here is screenshot of our search for artist: Morissey
-![](screenshots/morissey_search.png)
+![](screenshots/morrisey_search.png)
 
 What this is doing is upon typing the command concert-this you can type the name of the artists or band and it will give you useful information what you need about your band or artists!
 
@@ -101,19 +105,35 @@ What this is doing is gives us information about the movie you searched! You can
 
 ![](screenshots/movie-search_results.png)
 
+
+### If we don't put anything upon search it will gives us the default movie we set which is: Mr.Nobody
+
+![](screenshots/default_movie.png)
+
+
+
 ## node liri.js do-what-it-says 
 
 ![](screenshots/do-what-it-says-search.png)
 
 What this is doing is takes the text from external file in this scenario my random.txt file and outputs them as a string and puts them into array!
 With this we can see that we can access text from external file and use that to call function to gives us some info!
-In this case i have I Want it That way into random.txt and that's why it will show up that song! But we can do this with movie and concerts aswell!!!
+
+### In this case i haver rush hour movie into random.txt and that's why it will show up that movie! But we can do this with spotify-this-song and concert-this aswell!!!
 
 
 ![](screenshots/do-what-it-says_result.png)
 
+Also i tried  for movie-this and it's working!! I just needed to create separte function that gets a parameter and it's been called within the function i need:
 
-# Link to my delpoyed version of the app:
+![](screenshots/do-what-it-says_for_movie_this.png)
+
+# Link to my delpoyed version of the app: https://platzmanfan.github.io/liri-node-app/
+
+
+
+
+
 
 
 
