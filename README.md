@@ -141,9 +141,9 @@ Also i tried  for spotify-this-song and it's working!! I just needed to create s
 # Technologies:
 
 ## Moment.js to format Date
-## fs to load external files
-## dotenv 
-## axios - which is htpp request that gave me OMDB API and BandsInTown API
+## FS package which i install to load/write external files
+## dotenv - so i i can hide my api_keys for Spotify
+## axios - which is HTPP request that gave me OMDB API and BandsInTown API
 ## node-spotify-api  That gave me spotify search results
 
 
