@@ -28,10 +28,19 @@ var spotify = new Spotify(keys.spotify);
 var mainInput = process.argv[2];
 
 var input = process.argv;
-console.log(input);
+// console.log(input);
 var universalurl ="";
 
-
+var songname = "";
+for(var x=3;x < input.length;x++){
+    if(x > 3 && x <input.length){
+        songname = songname + "+"+ input[i]
+    }
+    else{
+        songname += input[i]
+    }
+    
+}
 // this is for multiple words movies to add to the url that we gonna need
 
 if (input[3] == null ){
@@ -49,11 +58,11 @@ for (var i = 3;i<input.length;i++){
     }
 }
 
-var findConcert = function(){
+var findConcert = function(a){
 
 
     var bandsUrl = "https://rest.bandsintown.com/artists/" + universalurl +"/events?app_id=codingbootcamp";
-    console.log(bandsUrl)
+    // console.log(bandsUrl)
     axios.get(bandsUrl).then(
         function(response){
            for(var i=0; i<response.data.length; i++){
@@ -94,8 +103,42 @@ var findConcert = function(){
     
     }
 
+var spotifyFunc = function(songname){
+    
+        console.log(songname)
+        spotify
+          .search({ type: 'track', query:songname,limit:10 })
+          .then(function(response) {
+            for(var i=0; i<response.tracks.items.length; i++){
+                
+                console.log("\n\n\n\n");
+                console.log("Artists");
+                console.log("--------------------");
+                console.log("|||| "+response.tracks.items[i].artists[0].name+" ||||");
+                console.log("---------------------------------");
+                console.log("-------Song's Name----------");
+                console.log("|||| "+response.tracks.items[i].name+" |||||");
+                console.log("-------------------------------");
+                console.log("-------Preview Link from spotify to listen---\n");
+                if(response.tracks.items[i].preview_url == null){
+                    console.log("Sorrry there are no links for this song")
+                }else{
+                console.log(response.tracks.items[i].preview_url);}
+                console.log("--------------------------------------------------------------------------");
+                console.log("-------The Album That the Song is from --------");
+                console.log("|  |   | "+ response.tracks.items[i].album.name+"  |  |  |");
+                console.log("------------------------------------")
+            }
+                
+          })
+          .catch(function(err) {
+            console.log(err);
+          });
+        }
+        
 var findSpotify = function(){
-    if (universalurl.length === 9){
+    
+    if (universalurl.length == 9){
         spotify
         .search({ type: 'track', query:"The Sign",limit:1 })
         .then(function(response) {
@@ -142,14 +185,14 @@ var findSpotify = function(){
         console.log(err);
       });
     }
-}
     
-
+}
 // creating queryUrl for axios
 var queryUrl = "http://www.omdbapi.com/?t=" + universalurl + "&y=&plot=short&apikey=trilogy";
 
 // creating the api request and printing out the info
-var displayMovie = function(){
+var displayMovie = function(universalurl){
+    
 axios.get(queryUrl).then(
     function(response) {
       console.log("---------Title--------");
@@ -205,15 +248,16 @@ var readFiles = function(){
     fse.readFile("random.txt","utf8",function(error,data)
     {   
         var array = data;
-        array = array.split(",");
+        array = array.split(",")
+        
 
-
+        console.log(array)
         if(error){
             return console.log(error);
         }
 
-        console.log(array)
-        findSpotify(array)
+        console.log(array[1]);
+        spotifyFunc(array[1]);
     });
   
 

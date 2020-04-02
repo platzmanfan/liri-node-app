@@ -106,6 +106,17 @@ What this is doing is gives us information about the movie you searched! You can
 What this is doing is gives us the random.txt that we had put in
 
 
+# Link to my delpoyed version of the app:
+
+
+
+# Technologies:
+
+## Moment.js to format Date
+## fs to load external files
+## dotenv 
+## axios - which is htpp request that gave me OMDB API and BandsInTown API
+## node-spotify-api  That gave me spotify search results
 
 
 
