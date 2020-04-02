@@ -103,7 +103,12 @@ What this is doing is gives us information about the movie you searched! You can
 
 ## node liri.js do-what-it-says 
 
-What this is doing is gives us the random.txt that we had put in
+![](screenshots/do-what-it-says-search.png)
+
+What this is doing is takes the text from external file in this scenario my random.txt file and outputs them as a string and puts them into array!
+With this we can see that we can access text from external file and use that to call function to gives us some info!
+
+![](screenshots/do-what-it-says_result.png)
 
 
 # Link to my delpoyed version of the app:
