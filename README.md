@@ -119,14 +119,14 @@ What this is doing is gives us information about the movie you searched! You can
 What this is doing is takes the text from external file in this scenario my random.txt file and outputs them as a string and puts them into array!
 With this we can see that we can access text from external file and use that to call function to gives us some info!
 
-### In this case i haver rush hour movie into random.txt and that's why it will show up that movie! But we can do this with spotify-this-song and concert-this aswell!!!
+### In this case i haver Matrix movie into random.txt and that's why it will show up that movie! But we can do this with spotify-this-song and concert-this aswell!!!
 
 
 ![](screenshots/matrix.png)
 
-Also i tried  for movie-this and it's working!! I just needed to create separte function that gets a parameter and it's been called within the function i need:
+Also i tried  for spotify-this-song and it's working!! I just needed to create separte function that gets a parameter and it's been called within the function i need!
 
-![](screenshots/do-what-it-says_for_movie_this.png)
+
 
 # Link to my delpoyed version of the app: https://platzmanfan.github.io/liri-node-app/
 
