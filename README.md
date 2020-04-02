@@ -62,7 +62,7 @@ At the end i created switch that takes the variable i created for userinput and 
 ![](screenshots/ss_greenday_search.png)
 
 ### Here is screenshot of our search for artist: Morissey
-![](screenshots/ss_morissey_search.png)
+![](screenshots/morissey_search.png)
 
 What this is doing is upon typing the command concert-this you can type the name of the artists or band and it will give you useful information what you need about your band or artists!
 
@@ -71,7 +71,7 @@ What this is doing is upon typing the command concert-this you can type the name
 ![](screenshots/concert_this_ss.png)
 
 ### Our result for Morissey search:
-![](screenshots/morrisey_search.png)
+![](screenshots/ss_results_morissey.png)
 
 ## node liri.js spotify-this-song <song name here>
 
