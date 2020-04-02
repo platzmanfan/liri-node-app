@@ -107,6 +107,8 @@ What this is doing is gives us information about the movie you searched! You can
 
 What this is doing is takes the text from external file in this scenario my random.txt file and outputs them as a string and puts them into array!
 With this we can see that we can access text from external file and use that to call function to gives us some info!
+In this case i have I Want it That way into random.txt and that's why it will show up that song! But we can do this with movie and concerts aswell!!!
+
 
 ![](screenshots/do-what-it-says_result.png)
 
